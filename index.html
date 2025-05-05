@@ -3,234 +3,571 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IP Address Detector</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <title>AZ-900 Practice Quiz 1-30</title>
     <style>
-        /* General Styles */
         body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            width: 90%;
+            font-family: Arial, sans-serif;
             max-width: 800px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
         }
-
-        h1 {
-            font-size: 2.5em;
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .question {
+            font-size: 18px;
             margin-bottom: 20px;
-            text-align: center;
-            font-weight: 600;
+            font-weight: bold;
         }
-
-        .ip-info {
+        .options {
             margin-bottom: 20px;
         }
-
-        .ip-info p {
+        .option {
             margin: 10px 0;
-            font-size: 1.2em;
-        }
-
-        .ip-lookup {
-            margin-top: 20px;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border: none;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            font-size: 1em;
-            outline: none;
-        }
-
-        input[type="text"]::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #2575fc;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 1em;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background-color 0.3s;
         }
-
-        button:hover {
-            background: #1b5fd9;
+        .option:hover {
+            background-color: #f0f0f0;
         }
-
-        .result {
+        .option.selected {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .option.correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        .feedback {
             margin-top: 20px;
-            font-size: 1.1em;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 8px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
         }
-
-        #map {
-            height: 300px;
-            width: 100%;
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        .next-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
             margin-top: 20px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .next-btn:hover {
+            background-color: #0069d9;
         }
-
-        .container {
-            animation: fadeIn 1s ease-in-out;
+        .progress {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        .instructions {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 10px;
         }
     </style>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7693765821591800"
-     crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>IP Address</h1>
-        <div class="ip-info">
-            <p><strong>Your IPv4 Address:</strong> <span id="ipv4">Loading...</span></p>
-            <p><strong>City:</strong> <span id="city">Loading...</span></p>
-            <p><strong>Region:</strong> <span id="region">Loading...</span></p>
-            <p><strong>Country:</strong> <span id="country">Loading...</span></p>
-            <p><strong>ISP:</strong> <span id="isp">Loading...</span></p>
-        </div>
-        <div class="ip-lookup">
-            <input type="text" id="ip-input" placeholder="Enter an IP address">
-            <button onclick="lookupIP()">Lookup IP</button>
-            <div class="result" id="lookup-result"></div>
-        </div>
-        <div id="map"></div>
+    <div class="quiz-container">
+        <div class="progress">Question 1 of 30</div>
+        <div class="instructions" id="instructions"></div>
+        <div class="question" id="question-text"></div>
+        <div class="options" id="options-container"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="next-btn" disabled>Next Question</button>
     </div>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Initialize the map
-        let map = L.map('map').setView([0, 0], 2); // Default view (world map)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+        const questions = [
+            {
+                question: "When you are implementing a software as a service (SaaS) solution, you are responsible for configuring high availability.",
+                instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
+                options: [
+                    "No change is needed",
+                    "defining scalability rules",
+                    "installing the SaaS solution",
+                    "configuring the SaaS solution"
+                ],
+                correctAnswer: 3,
+                explanation: "In SaaS, the provider manages high availability. You're responsible for configuring the SaaS solution."
+            },
+            {
+                question: "You have an on-premises network that contains several servers. You plan to migrate all the servers to Azure. You need to recommend a solution to ensure that some of the servers are available if a single Azure data center goes offline for an extended period. What should you include in the recommendation?",
+                options: [
+                    "fault tolerance",
+                    "elasticity",
+                    "scalability",
+                    "low latency"
+                ],
+                correctAnswer: 0,
+                explanation: "Fault tolerance ensures systems remain available during failures. Availability Zones provide fault tolerance within a region."
+            },
+            {
+                question: "An organization that hosts its infrastructure in a private cloud can decommission its data center.",
+                instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
+                options: [
+                    "No change is needed",
+                    "in a hybrid cloud",
+                    "in the public cloud",
+                    "on a Hyper-V host"
+                ],
+                correctAnswer: 2,
+                explanation: "Only in a public cloud scenario can an organization fully decommission its data center."
+            },
+            {
+                question: "What are two characteristics of the public cloud? Each correct answer presents a complete solution.",
+                options: [
+                    "dedicated hardware",
+                    "unsecured connections",
+                    "limited storage",
+                    "metered pricing",
+                    "self-service management"
+                ],
+                correctAnswer: [3, 4],
+                explanation: "Public cloud features include metered pricing (pay-as-you-go) and self-service management.",
+                isMultiSelect: true
+            },
+            {
+                question: "An Azure administrator plans to run a PowerShell script that creates Azure resources. You need to recommend which computer configuration to use to run the script. Solution: Run the script from a computer that runs Linux and has the Azure CLI tools installed. Does this meet the goal?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
+                correctAnswer: 1,
+                explanation: "PowerShell scripts require PowerShell, not just Azure CLI. This solution doesn't meet the goal."
+            },
+            {
+                question: "An Azure administrator plans to run a PowerShell script that creates Azure resources. You need to recommend which computer configuration to use to run the script. Solution: Run the script from a computer that runs Chrome OS and uses Azure Cloud Shell. Does this meet the goal?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
+                correctAnswer: 0,
+                explanation: "Azure Cloud Shell includes PowerShell and can run PowerShell scripts in a browser."
+            },
+            {
+                question: "An Azure administrator plans to run a PowerShell script that creates Azure resources. You need to recommend which computer configuration to use to run the script. Solution: Run the script from a computer that runs macOS and has PowerShell Core 6.0 installed. Does this meet the goal?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
+                correctAnswer: 1,
+                explanation: "The computer needs the Azure PowerShell module in addition to PowerShell Core."
+            },
+            {
+                question: "You have an Azure environment that contains 10 virtual networks and 100 virtual machines. You need to limit the amount of inbound traffic to all the Azure virtual networks. What should you create?",
+                options: [
+                    "one network security group (NSG)",
+                    "10 virtual network gateways",
+                    "10 Azure ExpressRoute circuits",
+                    "one Azure firewall"
+                ],
+                correctAnswer: 3,
+                explanation: "Azure Firewall can centrally restrict traffic across multiple virtual networks."
+            },
+            {
+                question: "You plan to map a network drive from several computers that run Windows 10 to Azure Storage. You need to create a storage solution in Azure for the planned mapped drive. What should you create?",
+                options: [
+                    "an Azure SQL database",
+                    "a virtual machine data disk",
+                    "a Files service in a storage account",
+                    "a Blobs service in a storage account"
+                ],
+                correctAnswer: 2,
+                explanation: "Azure Files provides SMB file shares that can be mapped as network drives."
+            },
+            {
+                question: "Your company plans to deploy an Artificial Intelligence (AI) solution in Azure. What should the company use to build, test, and deploy predictive analytics solutions?",
+                options: [
+                    "Azure Logic Apps",
+                    "Azure Machine Learning Studio",
+                    "Azure Batch",
+                    "Azure Cosmos DB"
+                ],
+                correctAnswer: 1,
+                explanation: "Azure Machine Learning Studio is designed for building, testing and deploying predictive analytics solutions."
+            },
+            {
+                question: "Azure policies provide a common platform for deploying objects to a cloud infrastructure and for implementing consistency across the Azure environment.",
+                instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
+                options: [
+                    "No change is needed",
+                    "Resource groups provide",
+                    "Azure Resource Manager provides",
+                    "Management groups provide"
+                ],
+                correctAnswer: 2,
+                explanation: "Azure Resource Manager provides the platform for deploying resources and implementing consistency."
+            },
+            {
+                question: "Your company has several business units. Each business unit requires 20 different Azure resources for daily operation. All the business units require the same type of Azure resources. You need to recommend a solution to automate the creation of the Azure resources. What should you include in the recommendations?",
+                options: [
+                    "Azure Resource Manager templates",
+                    "virtual machine scale sets",
+                    "the Azure API Management service",
+                    "management groups"
+                ],
+                correctAnswer: 0,
+                explanation: "ARM templates enable infrastructure-as-code for automated, repeatable deployments."
+            },
+            {
+                question: "Which Azure service should you use to collect events from multiple resources into a centralized repository?",
+                options: [
+                    "Azure Event Hubs",
+                    "Azure Analysis Services",
+                    "Azure Monitor",
+                    "Azure Log Analytics"
+                ],
+                correctAnswer: 0,
+                explanation: "Azure Event Hubs is a big data streaming platform for event ingestion."
+            },
+            {
+                question: "Your Azure environment contains multiple Azure virtual machines. You need to ensure that a virtual machine named VM1 is accessible from the Internet over HTTP. Solution: You modify a DDoS protection plan. Does this meet the goal?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
+                correctAnswer: 1,
+                explanation: "DDoS protection prevents attacks but doesn't configure HTTP access."
+            },
+            {
+                question: "Your Azure environment contains multiple Azure virtual machines. You need to ensure that a virtual machine named VM1 is accessible from the Internet over HTTP. Solution: You modify an Azure firewall. Does this meet the goal?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
+                correctAnswer: 0,
+                explanation: "Azure Firewall can be configured with rules to allow HTTP traffic."
+            },
+            {
+                question: "Your Azure environment contains multiple Azure virtual machines. You need to ensure that a virtual machine named VM1 is accessible from the Internet over HTTP. Solution: You modify an Azure Traffic Manager profile. Does this meet the goal?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
+                correctAnswer: 1,
+                explanation: "Traffic Manager is for DNS load balancing, not configuring HTTP access."
+            },
+            {
+                question: "You need to ensure that when Azure Active Directory (Azure AD) users connect to Azure AD from the Internet by using an anonymous IP address, the users are prompted automatically to change their password. Which Azure service should you use?",
+                options: [
+                    "Azure AD Connect Health",
+                    "Azure AD Privileged Identity Management",
+                    "Azure Advanced Threat Protection (ATP)",
+                    "Azure AD Identity Protection"
+                ],
+                correctAnswer: 3,
+                explanation: "Azure AD Identity Protection can detect anonymous IP usage and enforce password changes."
+            },
+            {
+                question: "Your company plans to deploy several web servers and several database servers to Azure. You need to recommend an Azure solution to limit the types of connections from the web servers to the database servers. What should you include in the recommendation?",
+                options: [
+                    "network security groups (NSGs)",
+                    "Azure Service Bus",
+                    "a local network gateway",
+                    "a route filter"
+                ],
+                correctAnswer: 0,
+                explanation: "NSGs can filter traffic between Azure resources by port and protocol."
+            },
+            {
+                question: "To what should an application connect to retrieve security tokens?",
+                options: [
+                    "an Azure Storage account",
+                    "Azure Active Directory (Azure AD)",
+                    "a certificate store",
+                    "an Azure key vault"
+                ],
+                correctAnswer: 1,
+                explanation: "Azure AD is the identity provider that issues security tokens."
+            },
+            {
+                question: "Resource groups provide organizations with the ability to manage the compliance of Azure resources across multiple subscriptions.",
+                instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
+                options: [
+                    "No change is needed",
+                    "Management groups",
+                    "Azure policies",
+                    "Azure App Service plans"
+                ],
+                correctAnswer: 1,
+                explanation: "Management groups provide governance across multiple subscriptions."
+            },
+            {
+                question: "Your network contains an Active Directory forest. The forest contains 5,000 user accounts. Your company plans to migrate all network resources to Azure and to decommission the on-premises data center. You need to recommend a solution to minimize the impact on users after the planned migration. What should you recommend?",
+                options: [
+                    "Implement Azure Multi-Factor Authentication (MFA)",
+                    "Sync all the Active Directory user accounts to Azure Active Directory (Azure AD)",
+                    "Instruct all users to change their password",
+                    "Create a guest user account in Azure Active Directory (Azure AD) for each user"
+                ],
+                correctAnswer: 1,
+                explanation: "Syncing AD accounts to Azure AD maintains user identities during migration."
+            },
+            {
+                question: "Your company plans to purchase Azure. The company's support policy states that the Azure environment must provide an option to access support engineers by phone or email. You need to recommend which support plan meets the support policy requirement. Solution: Recommend a Basic support plan. Does this meet the goal?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
+                correctAnswer: 1,
+                explanation: "Basic support doesn't include phone/email access to support engineers."
+            },
+            {
+                question: "Your company plans to purchase Azure. The company's support policy states that the Azure environment must provide an option to access support engineers by phone or email. You need to recommend which support plan meets the support policy requirement. Solution: Recommend a Standard support plan. Does this meet the goal?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
+                correctAnswer: 0,
+                explanation: "Standard support includes phone/email access to support engineers."
+            },
+            {
+                question: "Which of the following option is True regarding Azure File Sync?",
+                options: [
+                    "Upload/Download files using a physical device",
+                    "Copy blobs or files to or from your storage account using the command line",
+                    "Download/upload files and blobs in your Azure Storage Account using a GUI-based app installed on your local computer",
+                    "Cloud Tiering - most frequently accessed files are replicated locally, while infrequently accessed files are stored in azure"
+                ],
+                correctAnswer: 3,
+                explanation: "Azure File Sync provides cloud tiering functionality."
+            },
+            {
+                question: "Your company plans to request an architectural review of an Azure environment from Microsoft. The company currently has a Basic support plan. You need to recommend a new support plan for the company. The solution must minimize costs. Which support plan should you recommend?",
+                options: [
+                    "Premier",
+                    "Developer",
+                    "Professional Direct",
+                    "Standard"
+                ],
+                correctAnswer: 2,
+                explanation: "Professional Direct provides architectural support at lower cost than Premier."
+            },
+            {
+                question: "What is required to use Azure Cost Management?",
+                options: [
+                    "a Dev/Test subscription",
+                    "Software Assurance",
+                    "an Enterprise Agreement (EA)",
+                    "a pay-as-you-go subscription"
+                ],
+                correctAnswer: 3,
+                explanation: "Azure Cost Management works with pay-as-you-go subscriptions."
+            },
+            {
+                question: "Your Azure trial account expired last week. You are now unable to create additional Azure Active Directory (Azure AD) user accounts.",
+                instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
+                options: [
+                    "No change is needed",
+                    "start an existing Azure virtual machine",
+                    "access your data stored in Azure",
+                    "access the Azure portal"
+                ],
+                correctAnswer: 1,
+                explanation: "After trial expiration, you can't start VMs but can still access the portal and data."
+            },
+            {
+                question: "You have several virtual machines in an Azure subscription. You create a new subscription. The virtual machines cannot be moved to the new subscription.",
+                instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
+                options: [
+                    "No change is needed",
+                    "The virtual machines can be moved to the new subscription",
+                    "The virtual machines can be moved to the new subscription only if they are all in the same resource group",
+                    "The virtual machines can be moved to the new subscription only if they run Windows Server 2016."
+                ],
+                correctAnswer: 1,
+                explanation: "VMs can be moved between subscriptions under the same tenant."
+            },
+            {
+                question: "Which two types of customers are eligible to use Azure Government to develop a cloud solution?",
+                options: [
+                    "a Canadian government contractor",
+                    "a European government contractor",
+                    "a United States government entity",
+                    "a United States government contractor",
+                    "a European government entity"
+                ],
+                correctAnswer: [2, 3],
+                explanation: "Azure Government is exclusively for US government entities and contractors.",
+                isMultiSelect: true
+            },
+            {
+                question: "When planning to migrate a public website to Azure, you must plan to pay monthly usage costs.",
+                instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
+                options: [
+                    "No change is needed",
+                    "Deploy a VPN",
+                    "pay to transfer all the website data to Azure",
+                    "reduce the number of connections to the website"
+                ],
+                correctAnswer: 0,
+                explanation: "Azure uses pay-as-you-go pricing, so monthly usage costs apply."
+            }
+        ];
 
-        let marker;
+        // Quiz state
+        let currentQuestion = 0;
+        let selectedOption = null;
+        let score = 0;
 
-        // Function to fetch the user's IPv4 address and location details
-        async function fetchIPAddress() {
-            try {
-                // Fetch IPv4
-                const ipResponse = await fetch('https://api.ipify.org?format=json');
-                const ipData = await ipResponse.json();
-                document.getElementById('ipv4').textContent = ipData.ip;
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const instructions = document.getElementById('instructions');
+        const optionsContainer = document.getElementById('options-container');
+        const feedback = document.getElementById('feedback');
+        const nextBtn = document.getElementById('next-btn');
+        const progress = document.querySelector('.progress');
 
-                // Fetch location details for the user's IP
-                const locationResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
-                const locationData = await locationResponse.json();
-
-                // Display location details
-                document.getElementById('city').textContent = locationData.city || 'Unknown';
-                document.getElementById('region').textContent = locationData.region || 'Unknown';
-                document.getElementById('country').textContent = locationData.country_name || 'Unknown';
-                document.getElementById('isp').textContent = locationData.org || 'Unknown';
-
-                // Show the location on the map
-                if (locationData.latitude && locationData.longitude) {
-                    map.setView([locationData.latitude, locationData.longitude], 10);
-                    if (marker) {
-                        marker.setLatLng([locationData.latitude, locationData.longitude]);
+        // Initialize quiz
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            questionText.textContent = q.question;
+            instructions.textContent = q.instructions || "Select the correct answer:";
+            optionsContainer.innerHTML = '';
+            
+            // Update progress
+            progress.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            
+            // Create options
+            q.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                optionElement.textContent = option;
+                optionElement.dataset.index = index;
+                
+                optionElement.addEventListener('click', () => {
+                    if (!q.isMultiSelect) {
+                        // For single-select questions
+                        document.querySelectorAll('.option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        optionElement.classList.add('selected');
+                        selectedOption = index;
+                        nextBtn.disabled = false;
                     } else {
-                        marker = L.marker([locationData.latitude, locationData.longitude]).addTo(map);
+                        // For multi-select questions (toggle selection)
+                        optionElement.classList.toggle('selected');
+                        selectedOption = Array.from(document.querySelectorAll('.option.selected'))
+                                          .map(el => parseInt(el.dataset.index));
+                        nextBtn.disabled = selectedOption.length === 0;
                     }
-                    marker.bindPopup(`Your Location: ${locationData.city}, ${locationData.country_name}`).openPopup();
-                }
-            } catch (error) {
-                console.error('Error fetching IP address:', error);
-                document.getElementById('ipv4').textContent = 'Unable to fetch IPv4';
-                document.getElementById('city').textContent = 'Unable to fetch city';
-                document.getElementById('region').textContent = 'Unable to fetch region';
-                document.getElementById('country').textContent = 'Unable to fetch country';
-                document.getElementById('isp').textContent = 'Unable to fetch ISP';
-            }
+                });
+                
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Reset feedback and next button
+            feedback.className = 'feedback';
+            feedback.textContent = '';
+            nextBtn.disabled = true;
+            nextBtn.textContent = 'Check Answer';
+            selectedOption = null;
         }
 
-        // Function to perform IP lookup
-        async function lookupIP() {
-            const ip = document.getElementById('ip-input').value.trim();
-            if (!ip) {
-                alert('Please enter an IP address.');
-                return;
+        // Check answer and show feedback
+        function checkAnswer() {
+            const q = questions[currentQuestion];
+            let isCorrect;
+            
+            if (q.isMultiSelect) {
+                // For multi-select questions
+                isCorrect = selectedOption.length === q.correctAnswer.length &&
+                             selectedOption.every(val => q.correctAnswer.includes(val));
+            } else {
+                // For single-select questions
+                isCorrect = selectedOption === q.correctAnswer;
             }
-
-            try {
-                const response = await fetch(`https://ipapi.co/${ip}/json/`);
-                const data = await response.json();
-
-                const resultDiv = document.getElementById('lookup-result');
-                if (data.error) {
-                    resultDiv.textContent = `Error: ${data.reason}`;
+            
+            // Show feedback
+            if (isCorrect) {
+                feedback.textContent = "Correct! " + q.explanation;
+                feedback.className = 'feedback correct';
+                score++;
+            } else {
+                let correctAnswers;
+                if (Array.isArray(q.correctAnswer)) {
+                    correctAnswers = q.correctAnswer.map(i => q.options[i]).join(' or ');
                 } else {
-                    resultDiv.innerHTML = `
-                        <p><strong>IP:</strong> ${data.ip}</p>
-                        <p><strong>City:</strong> ${data.city}</p>
-                        <p><strong>Region:</strong> ${data.region}</p>
-                        <p><strong>Country:</strong> ${data.country_name}</p>
-                        <p><strong>ISP:</strong> ${data.org}</p>
-                    `;
-
-                    // Show the location on the map
-                    if (data.latitude && data.longitude) {
-                        map.setView([data.latitude, data.longitude], 10);
-                        if (marker) {
-                            marker.setLatLng([data.latitude, data.longitude]);
-                        } else {
-                            marker = L.marker([data.latitude, data.longitude]).addTo(map);
-                        }
-                        marker.bindPopup(`Location: ${data.city}, ${data.country_name}`).openPopup();
+                    correctAnswers = q.options[q.correctAnswer];
+                }
+                feedback.textContent = `Incorrect. The correct answer is: ${correctAnswers}. ${q.explanation}`;
+                feedback.className = 'feedback incorrect';
+            }
+            
+            // Highlight correct and incorrect answers
+            document.querySelectorAll('.option').forEach((opt, index) => {
+                if (q.isMultiSelect) {
+                    if (q.correctAnswer.includes(index)) {
+                        opt.classList.add('correct');
+                    }
+                    if (selectedOption.includes(index) && !q.correctAnswer.includes(index)) {
+                        opt.classList.add('incorrect');
+                    }
+                } else {
+                    if (index === q.correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                    if (index === selectedOption && index !== q.correctAnswer) {
+                        opt.classList.add('incorrect');
                     }
                 }
-            } catch (error) {
-                console.error('Error during IP lookup:', error);
-                document.getElementById('lookup-result').textContent = 'Unable to perform IP lookup';
+            });
+            
+            nextBtn.disabled = false;
+            nextBtn.textContent = 'Next Question';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                // Quiz completed
+                questionText.textContent = `Quiz completed! Your score: ${score}/${questions.length}`;
+                optionsContainer.innerHTML = '';
+                feedback.textContent = '';
+                nextBtn.style.display = 'none';
+                progress.textContent = '';
+                instructions.textContent = '';
             }
         }
 
-        // Fetch IP address and location details when the page loads
-        fetchIPAddress();
+        // Event listeners
+        nextBtn.addEventListener('click', () => {
+            if (nextBtn.textContent === 'Next Question') {
+                nextQuestion();
+            } else {
+                checkAnswer();
+            }
+        });
+
+        // Start quiz
+        loadQuestion();
     </script>
 </body>
 </html>
