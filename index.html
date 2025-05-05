@@ -88,6 +88,11 @@
             color: #666;
             margin-bottom: 10px;
         }
+        .question-number {
+            color: #007bff;
+            font-weight: bold;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -103,6 +108,7 @@
     <script>
         const questions = [
             {
+                number: 1,
                 question: "When you are implementing a software as a service (SaaS) solution, you are responsible for configuring high availability.",
                 instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
                 options: [
@@ -115,6 +121,7 @@
                 explanation: "In SaaS, the provider manages high availability. You're responsible for configuring the SaaS solution."
             },
             {
+                number: 2,
                 question: "You have an on-premises network that contains several servers. You plan to migrate all the servers to Azure. You need to recommend a solution to ensure that some of the servers are available if a single Azure data center goes offline for an extended period. What should you include in the recommendation?",
                 options: [
                     "fault tolerance",
@@ -126,6 +133,7 @@
                 explanation: "Fault tolerance ensures systems remain available during failures. Availability Zones provide fault tolerance within a region."
             },
             {
+                number: 3,
                 question: "An organization that hosts its infrastructure in a private cloud can decommission its data center.",
                 instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
                 options: [
@@ -138,6 +146,7 @@
                 explanation: "Only in a public cloud scenario can an organization fully decommission its data center."
             },
             {
+                number: 4,
                 question: "What are two characteristics of the public cloud? Each correct answer presents a complete solution.",
                 options: [
                     "dedicated hardware",
@@ -151,6 +160,7 @@
                 isMultiSelect: true
             },
             {
+                number: 5,
                 question: "An Azure administrator plans to run a PowerShell script that creates Azure resources. You need to recommend which computer configuration to use to run the script. Solution: Run the script from a computer that runs Linux and has the Azure CLI tools installed. Does this meet the goal?",
                 options: [
                     "Yes",
@@ -160,6 +170,7 @@
                 explanation: "PowerShell scripts require PowerShell, not just Azure CLI. This solution doesn't meet the goal."
             },
             {
+                number: 6,
                 question: "An Azure administrator plans to run a PowerShell script that creates Azure resources. You need to recommend which computer configuration to use to run the script. Solution: Run the script from a computer that runs Chrome OS and uses Azure Cloud Shell. Does this meet the goal?",
                 options: [
                     "Yes",
@@ -169,6 +180,7 @@
                 explanation: "Azure Cloud Shell includes PowerShell and can run PowerShell scripts in a browser."
             },
             {
+                number: 7,
                 question: "An Azure administrator plans to run a PowerShell script that creates Azure resources. You need to recommend which computer configuration to use to run the script. Solution: Run the script from a computer that runs macOS and has PowerShell Core 6.0 installed. Does this meet the goal?",
                 options: [
                     "Yes",
@@ -178,6 +190,7 @@
                 explanation: "The computer needs the Azure PowerShell module in addition to PowerShell Core."
             },
             {
+                number: 8,
                 question: "You have an Azure environment that contains 10 virtual networks and 100 virtual machines. You need to limit the amount of inbound traffic to all the Azure virtual networks. What should you create?",
                 options: [
                     "one network security group (NSG)",
@@ -189,6 +202,7 @@
                 explanation: "Azure Firewall can centrally restrict traffic across multiple virtual networks."
             },
             {
+                number: 9,
                 question: "You plan to map a network drive from several computers that run Windows 10 to Azure Storage. You need to create a storage solution in Azure for the planned mapped drive. What should you create?",
                 options: [
                     "an Azure SQL database",
@@ -200,6 +214,7 @@
                 explanation: "Azure Files provides SMB file shares that can be mapped as network drives."
             },
             {
+                number: 10,
                 question: "Your company plans to deploy an Artificial Intelligence (AI) solution in Azure. What should the company use to build, test, and deploy predictive analytics solutions?",
                 options: [
                     "Azure Logic Apps",
@@ -211,6 +226,7 @@
                 explanation: "Azure Machine Learning Studio is designed for building, testing and deploying predictive analytics solutions."
             },
             {
+                number: 11,
                 question: "Azure policies provide a common platform for deploying objects to a cloud infrastructure and for implementing consistency across the Azure environment.",
                 instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
                 options: [
@@ -223,6 +239,7 @@
                 explanation: "Azure Resource Manager provides the platform for deploying resources and implementing consistency."
             },
             {
+                number: 12,
                 question: "Your company has several business units. Each business unit requires 20 different Azure resources for daily operation. All the business units require the same type of Azure resources. You need to recommend a solution to automate the creation of the Azure resources. What should you include in the recommendations?",
                 options: [
                     "Azure Resource Manager templates",
@@ -234,6 +251,7 @@
                 explanation: "ARM templates enable infrastructure-as-code for automated, repeatable deployments."
             },
             {
+                number: 13,
                 question: "Which Azure service should you use to collect events from multiple resources into a centralized repository?",
                 options: [
                     "Azure Event Hubs",
@@ -245,6 +263,7 @@
                 explanation: "Azure Event Hubs is a big data streaming platform for event ingestion."
             },
             {
+                number: 14,
                 question: "Your Azure environment contains multiple Azure virtual machines. You need to ensure that a virtual machine named VM1 is accessible from the Internet over HTTP. Solution: You modify a DDoS protection plan. Does this meet the goal?",
                 options: [
                     "Yes",
@@ -254,6 +273,7 @@
                 explanation: "DDoS protection prevents attacks but doesn't configure HTTP access."
             },
             {
+                number: 15,
                 question: "Your Azure environment contains multiple Azure virtual machines. You need to ensure that a virtual machine named VM1 is accessible from the Internet over HTTP. Solution: You modify an Azure firewall. Does this meet the goal?",
                 options: [
                     "Yes",
@@ -263,6 +283,7 @@
                 explanation: "Azure Firewall can be configured with rules to allow HTTP traffic."
             },
             {
+                number: 16,
                 question: "Your Azure environment contains multiple Azure virtual machines. You need to ensure that a virtual machine named VM1 is accessible from the Internet over HTTP. Solution: You modify an Azure Traffic Manager profile. Does this meet the goal?",
                 options: [
                     "Yes",
@@ -272,6 +293,7 @@
                 explanation: "Traffic Manager is for DNS load balancing, not configuring HTTP access."
             },
             {
+                number: 17,
                 question: "You need to ensure that when Azure Active Directory (Azure AD) users connect to Azure AD from the Internet by using an anonymous IP address, the users are prompted automatically to change their password. Which Azure service should you use?",
                 options: [
                     "Azure AD Connect Health",
@@ -283,6 +305,7 @@
                 explanation: "Azure AD Identity Protection can detect anonymous IP usage and enforce password changes."
             },
             {
+                number: 18,
                 question: "Your company plans to deploy several web servers and several database servers to Azure. You need to recommend an Azure solution to limit the types of connections from the web servers to the database servers. What should you include in the recommendation?",
                 options: [
                     "network security groups (NSGs)",
@@ -294,6 +317,7 @@
                 explanation: "NSGs can filter traffic between Azure resources by port and protocol."
             },
             {
+                number: 19,
                 question: "To what should an application connect to retrieve security tokens?",
                 options: [
                     "an Azure Storage account",
@@ -305,6 +329,7 @@
                 explanation: "Azure AD is the identity provider that issues security tokens."
             },
             {
+                number: 20,
                 question: "Resource groups provide organizations with the ability to manage the compliance of Azure resources across multiple subscriptions.",
                 instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
                 options: [
@@ -317,6 +342,7 @@
                 explanation: "Management groups provide governance across multiple subscriptions."
             },
             {
+                number: 21,
                 question: "Your network contains an Active Directory forest. The forest contains 5,000 user accounts. Your company plans to migrate all network resources to Azure and to decommission the on-premises data center. You need to recommend a solution to minimize the impact on users after the planned migration. What should you recommend?",
                 options: [
                     "Implement Azure Multi-Factor Authentication (MFA)",
@@ -328,6 +354,7 @@
                 explanation: "Syncing AD accounts to Azure AD maintains user identities during migration."
             },
             {
+                number: 22,
                 question: "Your company plans to purchase Azure. The company's support policy states that the Azure environment must provide an option to access support engineers by phone or email. You need to recommend which support plan meets the support policy requirement. Solution: Recommend a Basic support plan. Does this meet the goal?",
                 options: [
                     "Yes",
@@ -337,6 +364,7 @@
                 explanation: "Basic support doesn't include phone/email access to support engineers."
             },
             {
+                number: 23,
                 question: "Your company plans to purchase Azure. The company's support policy states that the Azure environment must provide an option to access support engineers by phone or email. You need to recommend which support plan meets the support policy requirement. Solution: Recommend a Standard support plan. Does this meet the goal?",
                 options: [
                     "Yes",
@@ -346,6 +374,7 @@
                 explanation: "Standard support includes phone/email access to support engineers."
             },
             {
+                number: 24,
                 question: "Which of the following option is True regarding Azure File Sync?",
                 options: [
                     "Upload/Download files using a physical device",
@@ -357,6 +386,7 @@
                 explanation: "Azure File Sync provides cloud tiering functionality."
             },
             {
+                number: 25,
                 question: "Your company plans to request an architectural review of an Azure environment from Microsoft. The company currently has a Basic support plan. You need to recommend a new support plan for the company. The solution must minimize costs. Which support plan should you recommend?",
                 options: [
                     "Premier",
@@ -368,6 +398,7 @@
                 explanation: "Professional Direct provides architectural support at lower cost than Premier."
             },
             {
+                number: 26,
                 question: "What is required to use Azure Cost Management?",
                 options: [
                     "a Dev/Test subscription",
@@ -379,6 +410,7 @@
                 explanation: "Azure Cost Management works with pay-as-you-go subscriptions."
             },
             {
+                number: 27,
                 question: "Your Azure trial account expired last week. You are now unable to create additional Azure Active Directory (Azure AD) user accounts.",
                 instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
                 options: [
@@ -391,6 +423,7 @@
                 explanation: "After trial expiration, you can't start VMs but can still access the portal and data."
             },
             {
+                number: 28,
                 question: "You have several virtual machines in an Azure subscription. You create a new subscription. The virtual machines cannot be moved to the new subscription.",
                 instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
                 options: [
@@ -403,6 +436,7 @@
                 explanation: "VMs can be moved between subscriptions under the same tenant."
             },
             {
+                number: 29,
                 question: "Which two types of customers are eligible to use Azure Government to develop a cloud solution?",
                 options: [
                     "a Canadian government contractor",
@@ -416,6 +450,7 @@
                 isMultiSelect: true
             },
             {
+                number: 30,
                 question: "When planning to migrate a public website to Azure, you must plan to pay monthly usage costs.",
                 instructions: "Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
                 options: [
@@ -445,12 +480,12 @@
         // Initialize quiz
         function loadQuestion() {
             const q = questions[currentQuestion];
-            questionText.textContent = q.question;
+            questionText.innerHTML = `<span class="question-number">Question ${q.number}:</span> ${q.question}`;
             instructions.textContent = q.instructions || "Select the correct answer:";
             optionsContainer.innerHTML = '';
             
             // Update progress
-            progress.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            progress.textContent = `Question ${q.number} of 30`;
             
             // Create options
             q.options.forEach((option, index) => {
@@ -548,7 +583,7 @@
                 loadQuestion();
             } else {
                 // Quiz completed
-                questionText.textContent = `Quiz completed! Your score: ${score}/${questions.length}`;
+                questionText.innerHTML = `Quiz completed! Your score: ${score}/${questions.length}`;
                 optionsContainer.innerHTML = '';
                 feedback.textContent = '';
                 nextBtn.style.display = 'none';
