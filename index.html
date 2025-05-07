@@ -3,16 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7693765821591800"
-     crossorigin="anonymous"></script>
-    <title>Qs 1 - 30 </title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
     <title>AZ-900 Practice Quiz 1-30</title>
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -115,12 +106,6 @@
     </div>
 
     <script>
-        // Initialize the map
-        let map = L.map('map').setView([0, 0], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-        
         const questions = [
             {
                 number: 1,
@@ -484,55 +469,6 @@
         let selectedOption = null;
         let score = 0;
 
-        // Function to fetch the user's IPv4 address and location details
-        async function fetchIPAddress() {
-            try {
-                // Get IP first
-                const ipResponse = await fetch('https://api.ipify.org?format=json');
-                const ipData = await ipResponse.json();
-                document.getElementById('ipv4').textContent = ipData.ip;
-                
-                // Try more accurate API first
-                const locationResponse = await fetch(`https://ipwho.is/${ipData.ip}`);
-                const locationData = await locationResponse.json();
-
-                if (locationData.success) {
-                    updateLocationUI(locationData);
-                } else {
-                    // Fallback to ipapi.co if first API fails
-                    const fallbackResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
-                    const fallbackData = await fallbackResponse.json();
-                    updateLocationUI(fallbackData);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('city').textContent = 'Unknown';
-                document.getElementById('region').textContent = 'Unknown';
-                document.getElementById('country').textContent = 'Unknown';
-                document.getElementById('isp').textContent = 'Unknown';
-            }
-        }
-
-        function updateLocationUI(data) {
-            document.getElementById('city').textContent = data.city || 'Unknown';
-            document.getElementById('region').textContent = data.region || data.regionName || 'Unknown';
-            document.getElementById('country').textContent = data.country || data.country_name || 'Unknown';
-            document.getElementById('isp').textContent = data.connection?.isp || data.org || 'Unknown';
-
-            // Use latitude/longitude from whichever API worked
-            const lat = data.latitude || data.lat;
-            const lon = data.longitude || data.lon;
-            
-            if (lat && lon) {
-                map.setView([lat, lon], 10);
-                if (marker) {
-                    marker.setLatLng([lat, lon]);
-                } else {
-                    marker = L.marker([lat, lon]).addTo(map);
-                }
-                marker.bindPopup(`Location: ${data.city || ''}${data.city && data.country ? ', ' : ''}${data.country || ''}`).openPopup();
-            }
-            
         // DOM elements
         const questionText = document.getElementById('question-text');
         const instructions = document.getElementById('instructions');
@@ -585,7 +521,6 @@
             nextBtn.disabled = true;
             nextBtn.textContent = 'Check Answer';
             selectedOption = null;
-
         }
 
         // Check answer and show feedback
@@ -601,32 +536,6 @@
                 // For single-select questions
                 isCorrect = selectedOption === q.correctAnswer;
             }
-
-            try {
-                const response = await fetch(`https://ipwho.is/${ip}`);
-                const data = await response.json();
-
-                const resultDiv = document.getElementById('lookup-result');
-                if (!data.success) {
-                    resultDiv.textContent = `Error: ${data.message || 'Invalid IP address'}`;
-                } else {
-                    resultDiv.innerHTML = `
-                        <p><strong>IP:</strong> ${data.ip}</p>
-                        <p><strong>City:</strong> ${data.city || 'Unknown'}</p>
-                        <p><strong>Region:</strong> ${data.region || 'Unknown'}</p>
-                        <p><strong>Country:</strong> ${data.country || 'Unknown'}</p>
-                        <p><strong>ISP:</strong> ${data.connection?.isp || 'Unknown'}</p>
-                    `;
-
-                    if (data.latitude && data.longitude) {
-                        map.setView([data.latitude, data.longitude], 10);
-                        if (marker) {
-                            marker.setLatLng([data.latitude, data.longitude]);
-                        } else {
-                            marker = L.marker([data.latitude, data.longitude]).addTo(map);
-                        }
-                        marker.bindPopup(`IP Location: ${data.city || ''}${data.city && data.country ? ', ' : ''}${data.country || ''}`).openPopup();
-
             
             // Show feedback
             if (isCorrect) {
@@ -659,7 +568,6 @@
                     }
                     if (index === selectedOption && index !== q.correctAnswer) {
                         opt.classList.add('incorrect');
-
                     }
                 }
             });
