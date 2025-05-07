@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7693765821591800"
      crossorigin="anonymous"></script>
-    <title>IP Address Detector</title>
+    <title>Qs 1 - 30 </title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <!-- Leaflet CSS -->
@@ -116,13 +115,12 @@
     </div>
 
     <script>
-<<<<<<< HEAD
         // Initialize the map
         let map = L.map('map').setView([0, 0], 2);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
-=======
+        
         const questions = [
             {
                 number: 1,
@@ -480,14 +478,12 @@
                 explanation: "Azure uses pay-as-you-go pricing, so monthly usage costs apply."
             }
         ];
->>>>>>> 0970ac75ab64b4370a5448902cf7860a8299b7d6
 
         // Quiz state
         let currentQuestion = 0;
         let selectedOption = null;
         let score = 0;
 
-<<<<<<< HEAD
         // Function to fetch the user's IPv4 address and location details
         async function fetchIPAddress() {
             try {
@@ -536,7 +532,7 @@
                 }
                 marker.bindPopup(`Location: ${data.city || ''}${data.city && data.country ? ', ' : ''}${data.country || ''}`).openPopup();
             }
-=======
+            
         // DOM elements
         const questionText = document.getElementById('question-text');
         const instructions = document.getElementById('instructions');
@@ -589,7 +585,7 @@
             nextBtn.disabled = true;
             nextBtn.textContent = 'Check Answer';
             selectedOption = null;
->>>>>>> 0970ac75ab64b4370a5448902cf7860a8299b7d6
+
         }
 
         // Check answer and show feedback
@@ -605,7 +601,6 @@
                 // For single-select questions
                 isCorrect = selectedOption === q.correctAnswer;
             }
-<<<<<<< HEAD
 
             try {
                 const response = await fetch(`https://ipwho.is/${ip}`);
@@ -631,7 +626,7 @@
                             marker = L.marker([data.latitude, data.longitude]).addTo(map);
                         }
                         marker.bindPopup(`IP Location: ${data.city || ''}${data.city && data.country ? ', ' : ''}${data.country || ''}`).openPopup();
-=======
+
             
             // Show feedback
             if (isCorrect) {
@@ -664,7 +659,7 @@
                     }
                     if (index === selectedOption && index !== q.correctAnswer) {
                         opt.classList.add('incorrect');
->>>>>>> 0970ac75ab64b4370a5448902cf7860a8299b7d6
+
                     }
                 }
             });
