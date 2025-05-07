@@ -1,1 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Practice Questions (62-80)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .options {
+            margin-bottom: 20px;
+        }
+        .option {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #f0f0f0;
+        }
+        .option.selected {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .option.correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        .feedback {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+        .next-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .next-btn:hover {
+            background-color: #0069d9;
+        }
+        .progress {
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        .instructions {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .question-number {
+            color: #007bff;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Azure Practice Questions (62-80)</h1>
+        <div class="progress">Question 62 of 80</div>
+        <div class="instructions" id="instructions"></div>
+        <div class="question" id="question-text"></div>
+        <div class="options" id="options-container"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="next-btn" disabled>Check Answer</button>
+    </div>
 
+    <script>
+        const questions = [
+            {
+                number: 62,
+                question: "Your company has an on-premises network that contains multiple servers. The company plans to reduce the following administrative responsibilities of network administrators: - Backing up application data - Replacing failed server hardware - Managing physical server security - Updating server operating systems - Managing permissions to shared documents. The company plans to migrate several servers to Azure virtual machines. You need to identify which administrative responsibilities will be reduced after the planned migration. Which two responsibilities should you identify? Each correct answer presents a complete solution.",
+                options: [
+                    "Replacing failed server hardware",
+                    "Backing up application data",
+                    "Managing physical server security",
+                    "Updating server operating systems",
+                    "Managing permissions to shared documents"
+                ],
+                correctAnswer: [0, 2],
+                explanation: "Azure virtual machines run on Hyper-V physical servers. The physical servers are owned and managed by Microsoft. As an Azure customer, you have no access to the physical servers. Microsoft manage the replacement of failed server hardware and the security of the physical servers so you don't need to.",
+                isMultiSelect: true
+            },
+            {
+                number: 63,
+                question: "Hotspot Question: For each of the following statements, select Yes if the statement is true. Otherwise, select No.",
+                options: [
+                    "Virtual networks in different regions automatically connect to each other",
+                    "Resource names must be unique within their scope",
+                    "VNet address spaces should not overlap with other network ranges"
+                ],
+                correctAnswer: [1, 2],
+                explanation: "Box 1: No - You would need to setup the VNET connections, for example with peering. Box 2: Yes - All Azure resource types have a scope that defines the level that resource names must be unique. Box 3: Yes - As you build your network in Azure, it is important to ensure non-overlapping address spaces.",
+                isMultiSelect: true
+            },
+            {
+                number: 64,
+                question: "You have an Azure environment. You need to create a new Azure virtual machine from an Android laptop. Solution: You use PowerShell in Azure Cloud Shell. Does this meet the goal?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
+                correctAnswer: 0,
+                explanation: "Azure Cloud Shell is a browser-based shell experience to manage and develop Azure resources. Being browser-based, Azure Cloud Shell can be run on a browser from a tablet that runs the Android operating system."
+            },
+            {
+                number: 65,
+                question: "You have an Azure environment. You need to create a new Azure virtual machine from an Android laptop. Solution: You use the PowerApps portal. Does this meet the goal?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
+                correctAnswer: 1,
+                explanation: "PowerApps lets you quickly build business applications with little or no code. It is not used to create Azure virtual machines."
+            },
+            {
+                number: 66,
+                question: "You have an Azure environment. You need to create a new Azure virtual machine from an Android laptop. Solution: You use the Azure portal. Does this meet the goal?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
+                correctAnswer: 0,
+                explanation: "The Azure portal is a web-based, unified console that provides an alternative to command-line tools. Being web-based, the Azure portal can be run on a browser from a tablet that runs the Android operating system."
+            },
+            {
+                number: 67,
+                question: "An Azure region contains one or more data centers that are connected by using a low-latency network.",
+                options: [
+                    "No change is needed",
+                    "Is found in each country where Microsoft has a subsidiary office",
+                    "Can be found in every country in Europe and the Americas only",
+                    "Contains one or more data centers that are connect by using a high-latency network"
+                ],
+                correctAnswer: 0,
+                explanation: "A region is a set of data centres deployed within a latency-defined perimeter and connected through a dedicated regional low-latency network."
+            },
+            {
+                number: 68,
+                question: "You plan to deploy 20 virtual machines to an Azure environment. To ensure that a virtual machine named VM1 cannot connect to the other virtual machines, VM1 must be deployed to a separate virtual network.",
+                options: [
+                    "No change is needed",
+                    "run a different operating system than the other virtual machines",
+                    "be deployed to a separate resource group",
+                    "have two network interfaces"
+                ],
+                correctAnswer: 0,
+                explanation: "Placing VM1 in a separate virtual network would prevent network communication with the other VMs."
+            },
+            {
+                number: 69,
+                question: "When you need to delegate permissions to several Azure virtual machines simultaneously, you must deploy the Azure virtual machines to the same Azure region.",
+                options: [
+                    "No change is needed",
+                    "by using the same Azure Resource Manager template",
+                    "to the same resource group",
+                    "to the same availability zone"
+                ],
+                correctAnswer: 2,
+                explanation: "You can delegate permissions to all resources in a resource group at once."
+            },
+            {
+                number: 70,
+                question: "A team of developers at your company plans to deploy, and then remove, 50 customized virtual machines each week. Thirty of the virtual machines run Windows Server 2016 and 20 of the virtual machines run Ubuntu Linux. You need to recommend which Azure service will minimize the administrative effort required to deploy and remove the virtual machines. What should you recommend?",
+                options: [
+                    "Azure Reserved Virtual Machines (VM) Instances",
+                    "Azure virtual machine scale sets",
+                    "Azure DevTest Labs",
+                    "Microsoft Managed Desktop"
+                ],
+                correctAnswer: 2,
+                explanation: "DevTest Labs creates labs consisting of pre-configured bases or Azure Resource Manager templates, making it easy to quickly provision and deprovision environments."
+            },
+            {
+                number: 71,
+                question: "One of the benefits of Azure SQL Data Warehouse is that high availability is built into the platform.",
+                options: [
+                    "No change is needed",
+                    "automatic scaling",
+                    "data compression",
+                    "versioning"
+                ],
+                correctAnswer: 0,
+                explanation: "Azure Data Warehouse (now known as Azure Synapse Analytics) is a PaaS offering from Microsoft with high availability features built into the platform."
+            },
+            {
+                number: 72,
+                question: "A support engineer plans to perform several Azure management tasks by using the Azure CLI. You install the CLI on a computer. You need to tell the support engineer which tools to use to run the CLI. Which two tools should you instruct the support engineer to use? Each correct answer presents a complete solution.",
+                options: [
+                    "Command Prompt",
+                    "Azure Resource Explorer",
+                    "Windows PowerShell",
+                    "Windows Defender Firewall",
+                    "Network and Sharing Center"
+                ],
+                correctAnswer: [0, 2],
+                explanation: "For Windows the Azure CLI is installed via an MSI, which gives you access to the CLI through the Windows Command Prompt (CMD) or PowerShell.",
+                isMultiSelect: true
+            },
+            {
+                number: 73,
+                question: "You plan to store 20 TB of data in Azure. The data will be accessed infrequently and visualized by using Microsoft Power BI. You need to recommend a storage solution for the data. Which two solutions should you recommend? Each correct answer presents a complete solution.",
+                options: [
+                    "Azure Data Lake",
+                    "Azure Cosmos DB",
+                    "Azure SQL Data Warehouse",
+                    "Azure SQL Database",
+                    "Azure Database for PostgreSQL"
+                ],
+                correctAnswer: [0, 2],
+                explanation: "You can use Power BI to analyze and visualize data stored in Azure Data Lake and Azure SQL Data Warehouse.",
+                isMultiSelect: true
+            },
+            {
+                number: 74,
+                question: "You need to identify the type of failure for which an Azure Availability Zone can be used to protect access to Azure services. What should you identify?",
+                options: [
+                    "a physical server failure",
+                    "an Azure region failure",
+                    "a storage failure",
+                    "an Azure data center failure"
+                ],
+                correctAnswer: 3,
+                explanation: "Availability zones expand the level of control you have to maintain the availability of the applications and data on your VMs. Each Availability Zone is made up of one or more datacenters equipped with independent power, cooling, and networking."
+            },
+            {
+                number: 75,
+                question: "You have a virtual machine named VM1 that runs Windows Server 2016. VM1 is in the East US Azure region. Which Azure service should you use from the Azure portal to view service failure notifications that can affect the availability of VM1?",
+                options: [
+                    "Azure Service Fabric",
+                    "Azure Monitor",
+                    "Azure virtual machines",
+                    "Azure Advisor"
+                ],
+                correctAnswer: 2,
+                explanation: "In the Azure virtual machines page in the Azure portal, there is a named Maintenance Status. This column will display service issues that could affect your virtual machine."
+            },
+            {
+                number: 76,
+                question: "You have an Azure environment that contains multiple Azure virtual machines. You plan to implement a solution that enables the client computers on your on-premises network to communicate to the Azure virtual machines. You need to recommend which Azure resources must be created for the planned solution. Which two Azure resources should you include in the recommendation? Each correct answer presents part of the solution.",
+                options: [
+                    "a virtual network gateway",
+                    "a load balancer",
+                    "an application gateway",
+                    "a virtual network",
+                    "a gateway subnet"
+                ],
+                correctAnswer: [0, 4],
+                explanation: "To implement a solution that enables the client computers on your on-premises network to communicate to the Azure virtual machines, you need to configure a VPN (Virtual Private Network) to connect the on-premises network to the Azure virtual network. The virtual network gateway needs to be located in a dedicated subnet in the Azure virtual network.",
+                isMultiSelect: true
+            },
+            {
+                number: 77,
+                question: "You have an Azure environment. You need to create a new Azure virtual machine from an Android laptop. Solution: You use Bash in Azure Cloud Shell. Does this meet the goal?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
+                correctAnswer: 0,
+                explanation: "With Azure Cloud Shell, you can create virtual machines using Bash or PowerShell. Azure Cloud Shell is an interactive, authenticated, browser-accessible shell for managing Azure resources."
+            },
+            {
+                number: 78,
+                question: "Your company plans to move several servers to Azure. The company's compliance policy states that a server named FinServer must be on a separate network segment. You are evaluating which Azure services can be used to meet the compliance policy requirements. Which Azure solution should you recommend?",
+                options: [
+                    "a resource group for FinServer and another resource group for all the other servers",
+                    "a virtual network for FinServer and another virtual network for all the other servers",
+                    "a VPN for FinServer and a virtual network gateway for each other server",
+                    "one resource group for all the servers and a resource lock for FinServer"
+                ],
+                correctAnswer: 1,
+                explanation: "The only way to separate FinServer from the other servers in networking terms is to place the server in a different virtual network to the other servers."
+            },
+            {
+                number: 79,
+                question: "Your company plans to start using Azure and will migrate all its network resources to Azure. You need to start the planning process by exploring Azure. What should you create first?",
+                options: [
+                    "a subscription",
+                    "a resource group",
+                    "a virtual network",
+                    "a management group"
+                ],
+                correctAnswer: 0,
+                explanation: "The first thing you create in Azure is a subscription. You can think of an Azure subscription as an 'Azure account'. You get billed per subscription."
+            },
+            {
+                number: 80,
+                question: "You have an on-premises application that sends email notifications automatically based on a rule. You plan to migrate the application to Azure. You need to recommend a serverless computing solution for the application. What should you include in the recommendation?",
+                options: [
+                    "a web app",
+                    "a server image in Azure Marketplace",
+                    "a logic app",
+                    "an API app"
+                ],
+                correctAnswer: 2,
+                explanation: "Azure Logic Apps is a cloud service that helps you schedule, automate, and orchestrate tasks, business processes, and workflows when you need to integrate apps, data, systems, and services across enterprises or organizations."
+            }
+        ];
+
+        // Quiz state
+        let currentQuestion = 0;
+        let selectedOption = null;
+        let score = 0;
+
+        // DOM elements
+        const questionText = document.getElementById('question-text');
+        const instructions = document.getElementById('instructions');
+        const optionsContainer = document.getElementById('options-container');
+        const feedback = document.getElementById('feedback');
+        const nextBtn = document.getElementById('next-btn');
+        const progress = document.querySelector('.progress');
+
+        // Initialize quiz
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            questionText.innerHTML = `<span class="question-number">Question ${q.number}:</span> ${q.question}`;
+            instructions.textContent = q.instructions || "Select the correct answer:";
+            optionsContainer.innerHTML = '';
+            
+            // Update progress
+            progress.textContent = `Question ${q.number - 61} of 19`;
+            
+            // Create options
+            q.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                optionElement.textContent = option;
+                optionElement.dataset.index = index;
+                
+                optionElement.addEventListener('click', () => {
+                    if (!q.isMultiSelect) {
+                        // For single-select questions
+                        document.querySelectorAll('.option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        optionElement.classList.add('selected');
+                        selectedOption = index;
+                        nextBtn.disabled = false;
+                    } else {
+                        // For multi-select questions (toggle selection)
+                        optionElement.classList.toggle('selected');
+                        selectedOption = Array.from(document.querySelectorAll('.option.selected'))
+                                          .map(el => parseInt(el.dataset.index));
+                        nextBtn.disabled = selectedOption.length === 0;
+                    }
+                });
+                
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Reset feedback and next button
+            feedback.className = 'feedback';
+            feedback.textContent = '';
+            nextBtn.disabled = true;
+            nextBtn.textContent = 'Check Answer';
+            selectedOption = null;
+        }
+
+        // Check answer and show feedback
+        function checkAnswer() {
+            const q = questions[currentQuestion];
+            let isCorrect;
+            
+            if (q.isMultiSelect) {
+                // For multi-select questions
+                isCorrect = selectedOption.length === q.correctAnswer.length &&
+                             selectedOption.every(val => q.correctAnswer.includes(val));
+            } else {
+                // For single-select questions
+                isCorrect = selectedOption === q.correctAnswer;
+            }
+            
+            // Show feedback
+            if (isCorrect) {
+                feedback.textContent = "Correct! " + q.explanation;
+                feedback.className = 'feedback correct';
+                score++;
+            } else {
+                let correctAnswers;
+                if (Array.isArray(q.correctAnswer)) {
+                    correctAnswers = q.correctAnswer.map(i => q.options[i]).join(' or ');
+                } else {
+                    correctAnswers = q.options[q.correctAnswer];
+                }
+                feedback.textContent = `Incorrect. The correct answer is: ${correctAnswers}. ${q.explanation}`;
+                feedback.className = 'feedback incorrect';
+            }
+            
+            // Highlight correct and incorrect answers
+            document.querySelectorAll('.option').forEach((opt, index) => {
+                if (q.isMultiSelect) {
+                    if (q.correctAnswer.includes(index)) {
+                        opt.classList.add('correct');
+                    }
+                    if (selectedOption.includes(index) && !q.correctAnswer.includes(index)) {
+                        opt.classList.add('incorrect');
+                    }
+                } else {
+                    if (index === q.correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                    if (index === selectedOption && index !== q.correctAnswer) {
+                        opt.classList.add('incorrect');
+                    }
+                }
+            });
+            
+            nextBtn.disabled = false;
+            nextBtn.textContent = 'Next Question';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                // Quiz completed
+                questionText.innerHTML = `Quiz completed! Your score: ${score}/${questions.length}`;
+                optionsContainer.innerHTML = '';
+                feedback.textContent = '';
+                nextBtn.style.display = 'none';
+                progress.textContent = '';
+                instructions.textContent = '';
+            }
+        }
+
+        // Event listeners
+        nextBtn.addEventListener('click', () => {
+            if (nextBtn.textContent === 'Next Question') {
+                nextQuestion();
+            } else {
+                checkAnswer();
+            }
+        });
+
+        // Start quiz
+        loadQuestion();
+    </script>
+</body>
+  </html>
